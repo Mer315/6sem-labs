@@ -4,4 +4,4 @@
 - 4. jupyter notebook --version
 - 5. jupyter notebook
   - access it and create a folder, create an .ipynb file
-- 6.deactivate
+- 6. deactivate
