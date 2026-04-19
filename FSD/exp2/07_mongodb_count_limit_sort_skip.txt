@@ -1,0 +1,36 @@
+Question 7: Perform Count, Limit, Sort and Skip Operations Using MongoDB
+
+Description:
+This program demonstrates advanced query operations in MongoDB using the `students` collection. The `countDocuments()` method counts total or filtered records. `limit()` restricts the number of results returned. `sort()` arranges documents in ascending (1) or descending (-1) order based on a specified field like CGPA. `skip()` bypasses a defined number of documents before returning results. These methods are essential for implementing pagination and data analysis in MongoDB applications.
+
+Code:
+// Assume collection is: students
+
+// ---- Count Operations ----
+
+// Count all documents
+db.students.countDocuments()
+
+// Count with condition
+db.students.countDocuments({ department: "Computer Science" })
+
+
+// ---- Limit Operation ----
+
+// Return only 2 documents
+db.students.find().limit(2)
+
+
+// ---- Sort Operations ----
+
+// Sort by CGPA ascending (low to high)
+db.students.find().sort({ cgpa: 1 })
+
+// Sort by CGPA descending (high to low)
+db.students.find().sort({ cgpa: -1 })
+
+
+// ---- Skip Operation ----
+
+// Skip the first document and return the rest
+db.students.find().skip(1)

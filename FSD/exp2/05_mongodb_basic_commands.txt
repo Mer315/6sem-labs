@@ -1,0 +1,31 @@
+Question 5: Perform Basic Commands on Databases and Collections Using MongoDB
+
+Description:
+This program covers the fundamental MongoDB shell commands for managing databases and collections. It includes commands to view all databases, create or switch to a specific database, check the current database, and drop it. For collections, it demonstrates how to list existing collections, create a new collection, and drop one. These commands form the basic building blocks of MongoDB database administration and are executed directly in the MongoDB shell environment.
+
+Code:
+// ---- Database Commands ----
+
+// View all databases
+show dbs
+
+// Create a new or switch databases
+use 235c5
+
+// View current database
+db
+
+// Delete current database
+db.dropDatabase()
+
+
+// ---- Collection Commands ----
+
+// Show collections
+show collections
+
+// Create a collection named 'comments'
+db.createCollection('comments')
+
+// Drop a collection named 'students'
+db.students.drop()

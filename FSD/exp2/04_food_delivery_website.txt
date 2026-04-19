@@ -1,0 +1,57 @@
+Question 4: Develop a Food Delivery Website Using Node.js
+
+Description:
+This program creates a basic food delivery website using Node.js's built-in `http` and `fs` modules to serve an HTML page. The frontend displays restaurant choices (Pizza Hut, KFC, Dominos) via radio buttons. Selecting a restaurant dynamically shows its menu using JavaScript DOM manipulation. Users can type a food item and click "Place Order" to receive a confirmation alert. The server listens on port 3000 and serves the HTML file on the root route.
+
+Code:
+// app.js
+const http = require("http");
+const fs = require("fs");
+
+http.createServer((req, res) => {
+  if (req.url === "/") {
+    fs.readFile("food.html", (e, d) => {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(d);
+    });
+  }
+}).listen(3000);
+
+// Run using:
+// node app.js
+// Then open http://localhost:3000 in browser
+
+---
+
+// food.html
+<!DOCTYPE html>
+<html lang>
+<body>
+    <h3>Food Delivery</h3>
+    <input type="radio" name="r" onclick="showMenu('pizza')">Pizza Hut
+    <input type="radio" name="r" onclick="showMenu('kfc')">KFC
+    <input type="radio" name="r" onclick="showMenu('dominos')">Dominos
+    <br><br>
+    <div id="menu"></div>
+    <input type="text" id="food" placeholder="Enter Food item">
+    <br><br>
+    <button onclick="order()">Place Order</button>
+    <script>
+        function showMenu(type) {
+            var menu = document.getElementById("menu");
+            if (type === "pizza") {
+                menu.innerHTML = "Pizza Hut Menu:<br>Margherita - ₹199<br>Veg Supreme - ₹299<br>Cheese Burst - ₹349<br><br>";
+            } else if (type === "kfc") {
+                menu.innerHTML = "KFC Menu:<br>Fried Chicken - ₹249<br>Burger - ₹199<br>French Fries - ₹149<br><br>";
+            } else if (type === "dominos") {
+                menu.innerHTML = "Dominos Menu:<br>Veg Pizza - ₹199<br>Paneer Pizza - ₹299<br>Garlic Bread - ₹149<br><br>";
+            }
+        }
+        function order() {
+            var food = document.getElementById("food").value;
+            if (food != "")
+                alert("Order placed for " + food);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+Question 13: Develop a Leave Management System Using React JS
+
+Description:
+This program implements a Leave Management System using React JS where employees can apply for Casual Leave (CL) or Medical Leave (ML) and view remaining balances. The `useState` hook manages leave balances initialized to 10 (CL) and 8 (ML) days. Users enter the number of days and click apply — validation ensures the requested days are positive and don't exceed the available balance. A Reset button restores both leave counts to their original values, making the system reusable for testing.
+
+Code:
+// App.js
+
+import React, { useState } from "react";
+
+function App() {
+  const [casualLeave, setCasualLeave] = useState(10);
+  const [medicalLeave, setMedicalLeave] = useState(8);
+  const [clDays, setClDays] = useState("");
+  const [mlDays, setMlDays] = useState("");
+
+  const applyCL = () => clDays > 0 && clDays <= casualLeave
+    ? (setCasualLeave(casualLeave - clDays), setClDays(""))
+    : alert("Invalid CL");
+
+  const applyML = () => mlDays > 0 && mlDays <= medicalLeave
+    ? (setMedicalLeave(medicalLeave - mlDays), setMlDays(""))
+    : alert("Invalid ML");
+
+  const resetLeaves = () => (setCasualLeave(10), setMedicalLeave(8));
+
+  return (
+    <div style={{ textAlign: "center", marginTop: 50 }}>
+      <h1>Leave Management</h1>
+
+      <h2>Casual Leave: {casualLeave}</h2>
+      <input type="number" value={clDays} onChange={e => setClDays(Number(e.target.value))} />
+      <button onClick={applyCL}>Apply CL</button>
+
+      <h2>Medical Leave: {medicalLeave}</h2>
+      <input type="number" value={mlDays} onChange={e => setMlDays(Number(e.target.value))} />
+      <button onClick={applyML}>Apply ML</button>
+
+      <br /><br />
+      <button onClick={resetLeaves}>Reset</button>
+    </div>
+  );
+}
+
+export default App;
+
+// Setup Commands:
+// npx create-react-app demo
+// cd demo
+// Paste code in App.js
+// npm start

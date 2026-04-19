@@ -1,0 +1,37 @@
+Question 2: Create a Node.js Application for a User Login System
+
+Description:
+This program builds a simple user authentication system using Node.js and the Express framework. It provides two REST API endpoints — one for registering a new user and one for logging in. User data is stored temporarily in an in-memory array. The Express middleware parses incoming JSON requests, and responses are sent based on validation of credentials. Test using Thunder Client or Postman on port 3000.
+
+Code:
+// server.js
+const express = require("express");
+const app = express();
+app.use(express.json());
+
+let users = [];
+
+// Register route
+app.post("/register", (req, res) => {
+    let { username, password } = req.body;
+    if (!username || !password) return res.send("All fields required");
+    if (users.find(u => u.username === username)) return res.send("User exists");
+    users.push({ username, password });
+    res.send("Registered");
+});
+
+// Login route
+app.post("/login", (req, res) => {
+    let { username, password } = req.body;
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user)
+        res.send("Login successful");
+    else
+        res.send("Invalid credentials");
+});
+
+app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+
+// Run using:
+// node server.js
+// Test using Thunder Client or Postman

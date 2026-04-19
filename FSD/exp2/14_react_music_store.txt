@@ -1,0 +1,48 @@
+Question 14: Develop a Music Store Application Using React JS
+
+Description:
+This program builds a Music Store application using React JS with React Router DOM for client-side navigation. It features three routes — Home, Songs, and Cart — accessible via navigation links. The Songs page lists available songs with an "Add" button that adds them to the cart and shows a confirmation message using `useState`. The Cart page displays all added songs as a comma-separated list. This demonstrates component-based architecture, routing, and state management in a real-world React application.
+
+Code:
+// App.js
+
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+export default function App() {
+  const [cart, setCart] = useState([]);
+  const [msg, setMsg] = useState("");
+  const songs = ["Song 1", "Song 2"];
+
+  return (
+    <BrowserRouter>
+      <div style={{ textAlign: "center", marginTop: "100px" }}>
+        <Link to="/">Home</Link> | <Link to="/songs">Songs</Link> | <Link to="/cart">Cart</Link>
+
+        <Routes>
+          <Route path="/" element={<h2>Music Store 🎵</h2>} />
+
+          <Route path="/songs" element={
+            <>
+              {songs.map((s, i) =>
+                <div key={i}>{s}
+                  <button onClick={() => { setCart([...cart, s]); setMsg(s + " added"); }}>Add</button>
+                </div>
+              )}
+              <p>{msg}</p>
+            </>
+          } />
+
+          <Route path="/cart" element={<h3>{cart.join(", ") || "Empty"}</h3>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+// Setup Commands:
+// npx create-react-app demo
+// cd demo
+// npm install react-router-dom
+// Paste code in App.js
+// npm start

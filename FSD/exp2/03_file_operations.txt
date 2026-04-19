@@ -1,0 +1,50 @@
+Question 3: Write a Node.js Program to Perform File Operations
+
+Description:
+This program demonstrates the use of Node.js built-in `fs` (File System) module to perform essential file operations. It sequentially writes content to a file, reads it back, appends new data, reads it again, renames the file, and finally deletes it. All operations use asynchronous callback-based methods. This showcases how Node.js handles I/O operations in a non-blocking, nested callback pattern for real-world file management scenarios.
+
+Code:
+// file.js
+const fs = require("fs");
+
+// 1. Write file
+fs.writeFile("data.txt", "Hello Node.js File System!", (err) => {
+    if (err) { console.log("Error writing file"); return; }
+    console.log("File written successfully");
+
+    // 2. Read file
+    fs.readFile("data.txt", "utf8", (err, data) => {
+        if (err) { console.log("Error reading file"); return; }
+        console.log("\nFile content after write:");
+        console.log(data);
+
+        // 3. Append file
+        fs.appendFile("data.txt", "\nThis is appended text.", (err) => {
+            if (err) { console.log("Error appending file"); return; }
+            console.log("\nData appended successfully");
+
+            // 4. Read again after append
+            fs.readFile("data.txt", "utf8", (err, newData) => {
+                if (err) { console.log("Error reading file"); return; }
+                console.log("\nFile content after append:");
+                console.log(newData);
+
+                // 5. Rename file
+                fs.rename("data.txt", "newdata.txt", (err) => {
+                    if (err) { console.log("Error renaming file"); return; }
+                    console.log("\nFile renamed successfully");
+                    console.log("New file name: newdata.txt");
+
+                    // 6. Delete file
+                    fs.unlink("newdata.txt", (err) => {
+                        if (err) { console.log("Error deleting file"); return; }
+                        console.log("\nFile deleted successfully");
+                    });
+                });
+            });
+        });
+    });
+});
+
+// Run using:
+// node file.js

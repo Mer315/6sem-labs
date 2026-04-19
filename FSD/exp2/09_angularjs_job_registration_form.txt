@@ -1,0 +1,45 @@
+Question 9: Develop a Job Registration Form and Validate it Using AngularJS
+
+Description:
+This program creates a Job Registration form using AngularJS with built-in form validation. It includes fields for name, email, and a dropdown to select a job position (Developer, Designer, or Tester). AngularJS directives such as `ng-model`, `ng-submit`, and `required` are used to bind data and enforce validation. On successful submission, a confirmation message is displayed using the controller's `$scope`. The form uses flexbox CSS for a clean, centered layout.
+
+Code:
+// index.html
+
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+form { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+</style>
+</head>
+<body ng-controller="ctrl">
+
+<form ng-submit="submit()">
+  <input type="text" ng-model="name" placeholder="Name" required>
+  <input type="email" ng-model="email" placeholder="Email" required>
+  <select ng-model="position" required>
+    <option value="" disabled selected>Select Position</option>
+    <option>Developer</option>
+    <option>Designer</option>
+    <option>Tester</option>
+  </select>
+  <button type="submit">Register</button>
+</form>
+
+<p>{{msg}}</p>
+
+<script>
+angular.module("app", []).controller("ctrl", function($scope) {
+  $scope.submit = function() {
+    $scope.msg = "Job Registered for " + $scope.name + " as " + $scope.position;
+  };
+});
+</script>
+
+</body>
+</html>
+
+// Steps:
+// Open VS Code → Create folder → Create index.html → Paste code → Run with Live Server

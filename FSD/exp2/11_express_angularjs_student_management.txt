@@ -1,0 +1,74 @@
+Question 11: Develop a Web Application to Manage Student Information Using Express and AngularJS
+
+Description:
+This program integrates an Express.js backend with an AngularJS frontend to manage student information. The Express server provides REST API endpoints to retrieve and add student records stored in memory. The AngularJS frontend fetches and displays the student list in a table and allows adding new students via input fields. Express serves the static frontend files using `express.static`. This demonstrates a full-stack interaction between a Node.js server and a dynamic AngularJS client.
+
+Code:
+// Setup Commands:
+// npm init -y
+// npm install express
+// node server.js
+// Then open http://localhost:3000 in browser
+
+---
+
+// server.js
+
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+app.use(express.static("public")); // serve frontend files
+
+let students = [
+  { id: 1, name: "Hansini", course: "CSE" },
+  { id: 2, name: "Adifa", course: "ECE" }
+];
+
+app.get("/students", (req, res) => {
+  res.json(students);
+});
+
+app.post("/students", (req, res) => {
+  let s = req.body;
+  s.id = students.length + 1;
+  students.push(s);
+  res.json({ message: "Added" });
+});
+
+app.listen(3000);
+
+---
+
+// index.html
+
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+body { text-align: center; margin-top: 30px; font-family: sans-serif; }
+input, button { margin: 5px; padding: 5px; }
+table { margin: 20px auto; border-collapse: collapse; }
+th, td { border: 1px solid #000; padding: 5px; }
+</style>
+</head>
+<body>
+
+<h2>Student List</h2>
+<table>
+  <tr><th>ID</th><th>Name</th><th>Course</th></tr>
+  <tr ng-repeat="s in students">
+    <td>{{$index + 1}}</td>
+    <td>{{s.name}}</td>
+    <td>{{s.course}}</td>
+  </tr>
+</table>
+
+<h3>Add Student</h3>
+<input ng-model="newName" placeholder="Name">
+<input ng-model="newCourse" placeholder="Course">
+<button ng-click="students = (students || []).concat({name:newName, course:newCourse}); newName=''; newCourse=''">Add</button>
+
+</body>
+</html>

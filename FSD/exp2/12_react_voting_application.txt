@@ -1,0 +1,44 @@
+Question 12: Create a Voting Application Using React JS
+
+Description:
+This program builds a simple voting application using React JS with the `useState` hook. Three candidates — Hansini, Yasasvi, and Adifa — each have a vote counter and a corresponding button. Clicking a button increments that candidate's vote count. The application dynamically calculates the current winner by comparing all vote counts using `Math.max()`. If no votes have been cast, it displays "No votes yet". The UI is centered and updates in real time with every click.
+
+Code:
+// App.js
+
+import React, { useState } from "react";
+
+function App() {
+  const [hansini, setHansini] = useState(0);
+  const [yasasvi, setYasasvi] = useState(0);
+  const [adifa, setAdifa] = useState(0);
+
+  const maxVotes = Math.max(hansini, yasasvi, adifa);
+  let winner = maxVotes === 0 ? "No votes yet" :
+               maxVotes === hansini ? "Hansini" :
+               maxVotes === yasasvi ? "Yasasvi" : "Adifa";
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Simple Counter App</h1>
+      <h2>Winner: {winner} ({maxVotes})</h2>
+
+      <h3>Hansini Votes: {hansini}</h3>
+      <button onClick={() => setHansini(hansini + 1)}>Vote Hansini</button>
+
+      <h3>Yasasvi Votes: {yasasvi}</h3>
+      <button onClick={() => setYasasvi(yasasvi + 1)}>Vote Yasasvi</button>
+
+      <h3>Adifa Votes: {adifa}</h3>
+      <button onClick={() => setAdifa(adifa + 1)}>Vote Adifa</button>
+    </div>
+  );
+}
+
+export default App;
+
+// Setup Commands:
+// npx create-react-app demo
+// cd demo
+// Paste code in App.js
+// npm start

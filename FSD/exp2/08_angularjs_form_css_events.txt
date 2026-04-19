@@ -1,0 +1,37 @@
+Question 8: Develop an AngularJS Form to Apply CSS and Events
+
+Description:
+This program uses AngularJS to build an interactive form with CSS styling and event handling. The form includes a name and email input field and a submit button. AngularJS directives like `ng-model`, `ng-click`, `ng-focus`, and `ng-blur` are used to bind data and handle user interactions. When the user focuses on the name field, a highlight CSS class is applied dynamically. On clicking submit, a personalized message is displayed using two-way data binding.
+
+Code:
+// index.html
+
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+form { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+</style>
+</head>
+<body ng-controller="ctrl">
+
+<form>
+  <input ng-model="name" placeholder="Name" ng-focus="f=1" ng-blur="f=0" ng-class="{'highlight':f}">
+  <br>
+  <input ng-model="email" placeholder="Email">
+  <br>
+  <button ng-click="msg='Form Submitted by '+name">Submit</button>
+</form>
+
+<p>{{msg}}</p>
+
+<script>
+angular.module("app", []).controller("ctrl", function($scope) {});
+</script>
+
+</body>
+</html>
+
+// Steps:
+// Open VS Code → Create folder → Create index.html → Paste code → Run with Live Server

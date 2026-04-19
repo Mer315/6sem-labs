@@ -1,0 +1,79 @@
+Question 6: Perform CRUD Operations Using MongoDB
+
+Description:
+This program demonstrates all four CRUD operations — Create, Read, Update, and Delete — on a MongoDB `students` collection within the `collegeDB` database. It covers inserting single and multiple documents, retrieving all or filtered documents with projection, updating individual or multiple records using `$set` and `$inc` operators, and deleting one, many, or all documents. These operations are fundamental for managing structured data in a MongoDB NoSQL database environment.
+
+Code:
+// Sample Dataset
+// Database: collegeDB | Collection: students
+
+use collegeDB
+
+// ---- CREATE ----
+
+// Insert One Document
+db.students.insertOne({
+  student_id: 101,
+  name: "Anita Sharma",
+  department: "Computer Science",
+  year: 3,
+  cgpa: 8.4
+})
+
+// Insert Multiple Documents
+db.students.insertMany([
+  { student_id: 102, name: "Rahul Verma", department: "Information Technology", year: 2, cgpa: 7.9 },
+  { student_id: 103, name: "Neha Singh", department: "Computer Science", year: 4, cgpa: 9.1 }
+])
+
+
+// ---- READ ----
+
+// Retrieve All Documents
+db.students.find()
+
+// Retrieve with Condition
+db.students.find({ department: "Computer Science" })
+
+// Retrieve Specific Fields (Projection)
+db.students.find({ year: 3 }, { name: 1, cgpa: 1, _id: 0 })
+
+// Find One Document
+db.students.findOne({ student_id: 102 })
+
+
+// ---- UPDATE ----
+
+// Update One Document
+db.students.updateOne(
+  { student_id: 101 },
+  { $set: { cgpa: 8.8 } }
+)
+
+// Update Multiple Documents
+db.students.updateMany(
+  { department: "Computer Science" },
+  { $set: { department: "CSE" } }
+)
+
+// Increment a Field
+db.students.updateOne(
+  { student_id: 102 },
+  { $inc: { cgpa: 0.2 } }
+)
+
+db.students.find()
+
+
+// ---- DELETE ----
+
+// Delete One Document
+db.students.deleteOne({ student_id: 103 })
+
+// Delete Multiple Documents
+db.students.deleteMany({ year: 2 })
+
+// Delete All Documents
+db.students.deleteMany({})
+
+db.students.find()

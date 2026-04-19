@@ -1,0 +1,11 @@
+Question 1: Setup Node.js Environment and Display Hello World
+
+Description:
+This program demonstrates how to set up a basic Node.js environment and run a simple JavaScript file. Node.js is a runtime environment that allows JavaScript to run on the server side. The `console.log()` function is used to print output to the terminal. This is the foundational step to verify that Node.js is correctly installed and working on your system before building more complex applications.
+
+Code:
+// hello.js
+console.log("Hello World");
+
+// Run using:
+// node hello.js

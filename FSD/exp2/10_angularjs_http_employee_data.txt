@@ -1,0 +1,52 @@
+Question 10: Write an AngularJS Application to Access JSON File Data of an Employee from a Server Using $http Service
+
+Description:
+This program demonstrates how to fetch data from a JSON file using AngularJS's `$http` service and display it in a tabular format. The `employees.json` file contains employee records with ID, name, and role. The AngularJS controller makes a GET request to load the JSON data and binds it to the `$scope`. The `ng-repeat` directive iterates over the employee list and renders each record in a styled HTML table. Run with Live Server to allow HTTP requests.
+
+Code:
+// employees.json
+[
+  { "id": 1, "name": "Hansini", "role": "Developer" },
+  { "id": 2, "name": "Adifa", "role": "Designer" },
+  { "id": 3, "name": "Yasasvi", "role": "Tester" }
+]
+
+---
+
+// index.html
+
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+table { margin: 30px auto; border: 1px solid #000; border-collapse: collapse; font-family: sans-serif; }
+th, td { border: 1px solid #000; padding: 5px; text-align: center; }
+</style>
+</head>
+<body ng-controller="ctrl">
+
+<h2 style="text-align:center;">Employee List</h2>
+<table>
+  <tr><th>ID</th><th>Name</th><th>Role</th></tr>
+  <tr ng-repeat="emp in employees">
+    <td>{{emp.id}}</td>
+    <td>{{emp.name}}</td>
+    <td>{{emp.role}}</td>
+  </tr>
+</table>
+
+<script>
+angular.module("app", [])
+.controller("ctrl", function($scope, $http) {
+  $http.get("employees.json").then(function(response) {
+    $scope.employees = response.data;
+  });
+});
+</script>
+
+</body>
+</html>
+
+// Steps:
+// Create both files in the same folder → Run index.html with Live Server
