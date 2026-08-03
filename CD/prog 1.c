@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Symbol
+{
+    char name[20];
+    char type[20];
+    int value;
+};
+
+int main()
+{
+    struct Symbol table[100];
+    int n, i;
+
+    printf("Enter number of symbols: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+    {
+        printf("\nEnter Symbol Name: ");
+        scanf("%s", table[i].name);
+
+        printf("Enter Data Type: ");
+        scanf("%s", table[i].type);
+
+        printf("Enter Value: ");
+        scanf("%d", &table[i].value);
+    }
+
+    printf("\nSYMBOL TABLE\n");
+    printf("---------------------------------\n");
+    printf("Name\tType\tValue\n");
+    printf("---------------------------------\n");
+
+    for(i = 0; i < n; i++)
+    {
+        printf("%s\t%s\t%d\n",
+               table[i].name,
+               table[i].type,
+               table[i].value);
+    }
+
+    return 0;
+}
