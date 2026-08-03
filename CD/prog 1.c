@@ -43,3 +43,10 @@ int main()
 
     return 0;
 }
+
+
+
+// to run it
+nano prog1.c
+gcc prog1.c -o prog1
+./prog1
